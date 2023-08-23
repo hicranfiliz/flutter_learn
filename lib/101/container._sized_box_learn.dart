@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ContainerSizedBoxLearn extends StatelessWidget {
+  const ContainerSizedBoxLearn({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,9 +20,9 @@ class ContainerSizedBoxLearn extends StatelessWidget {
               child: Text('b' * 50),
             ),
             Container(
-              height: 50,
+              //responsive
               constraints: const BoxConstraints(
-                  maxWidth: 150, minWidth: 100, maxHeight: 150),
+                  maxWidth: 150, minWidth: 100, maxHeight: 100, minHeight: 60),
               child: Text('a' * 1),
               padding: const EdgeInsets.all(10),
               margin: const EdgeInsets.all(10),
@@ -32,26 +34,24 @@ class ContainerSizedBoxLearn extends StatelessWidget {
 }
 
 class ProjectUtility {
-
   static BoxDecoration boxDecoration = BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  gradient:
-                      const LinearGradient(colors: [Colors.red, Colors.black]),
-                  boxShadow: const [
-                    BoxShadow(
-                        color: Colors.green,
-                        offset: Offset(0.1, 1),
-                        blurRadius: 12)
-                  ],
-                  // shape: BoxShape.circle,
-                  border: Border.all(width: 10, color: Colors.white12));
+      borderRadius: BorderRadius.circular(10),
+      gradient: const LinearGradient(colors: [Colors.red, Colors.black]),
+      boxShadow: const [
+        BoxShadow(color: Colors.green, offset: Offset(0.1, 1), blurRadius: 12)
+      ],
+      // shape: BoxShape.circle,
+      border: Border.all(width: 10, color: Colors.white12));
 }
 
-class ProjectContainerDecoration extends BoxDecoration{
-  ProjectContainerDecoration(): super(
-    borderRadius: BorderRadius.circular(10),
-    gradient: const LinearGradient(colors: [ Colors.red,Colors.black]),
-    boxShadow: const [BoxShadow(color: Colors.green, offset: Offset(0.1, 1),blurRadius:12)],
-    border: Border.all(width: 10, color: Colors.white12)
-  )
+class ProjectContainerDecoration extends BoxDecoration {
+  ProjectContainerDecoration()
+      : super(
+            borderRadius: BorderRadius.circular(10),
+            gradient: const LinearGradient(colors: [Colors.red, Colors.black]),
+            boxShadow: const [
+              BoxShadow(
+                  color: Colors.green, offset: Offset(0.1, 1), blurRadius: 12)
+            ],
+            border: Border.all(width: 10, color: Colors.white12));
 }
