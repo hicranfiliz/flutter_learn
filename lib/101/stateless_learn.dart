@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class StatelessLearn extends StatelessWidget {
+  //textleri her zaman buraya çikart
+  final String title2 = "hicran";
+  final String title3 = "ravza";
   @override
   // build ixinde ekranlari gelistiririz.
   // her widget'in kendine ozel bir build metodu vardir.
@@ -10,11 +13,11 @@ class StatelessLearn extends StatelessWidget {
       body: Column(
         children: [
           TitleTextWidget(
-            title: 'hicran',
+            title: title2,
           ),
           _emptyBox(),
           TitleTextWidget(
-            title: 'ravza',
+            title: title3,
           ),
           _emptyBox(),
           TitleTextWidget(
