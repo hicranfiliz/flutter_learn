@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_learn/101/app_bar.dart';
 import 'package:flutter_learn/101/color_learn.dart';
 import 'package:flutter_learn/101/icon_learn.dart';
+import 'package:flutter_learn/101/padding_learn.dart';
 import 'package:flutter_learn/101/stateless_learn.dart';
 
 void main() {
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 0,
           )),
-      home: StatelessLearn(),
+      home: const PaddingLearn(),
     );
   }
 }
