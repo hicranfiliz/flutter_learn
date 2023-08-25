@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 0,
           )),
-      home: const ImageLearn(),
+      home: const NoteDemos(),
     );
   }
 }
