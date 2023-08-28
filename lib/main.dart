@@ -3,8 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_learn/101/app_bar.dart';
 import 'package:flutter_learn/101/card_learn.dart';
 import 'package:flutter_learn/101/color_learn.dart';
+import 'package:flutter_learn/101/custom_widget_learn.dart';
 import 'package:flutter_learn/101/icon_learn.dart';
 import 'package:flutter_learn/101/image_learn.dart';
+import 'package:flutter_learn/101/indicator_learn.dart';
+import 'package:flutter_learn/101/list_tile_learn.dart';
 import 'package:flutter_learn/101/padding_learn.dart';
 import 'package:flutter_learn/101/stateless_learn.dart';
 import 'package:flutter_learn/101/text_learn_view.dart';
@@ -26,7 +29,11 @@ class MyApp extends StatelessWidget {
       // ap'teki butun appbarlarda bulunan ortak ozellikleri belirt:
       // appbar'i her zaman burada belirt.
       theme: ThemeData.dark().copyWith(
+          progressIndicatorTheme:
+              const ProgressIndicatorThemeData(color: Colors.red),
           // butun card'lari ayni yapar.
+          listTileTheme:
+              const ListTileThemeData(contentPadding: EdgeInsets.zero),
           cardTheme: CardTheme(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20))),
@@ -41,7 +48,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 0,
           )),
-      home: const NoteDemos(),
+      home: const ListTileLearn(),
     );
   }
 }
