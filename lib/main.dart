@@ -10,6 +10,7 @@ import 'package:flutter_learn/101/image_learn.dart';
 import 'package:flutter_learn/101/indicator_learn.dart';
 import 'package:flutter_learn/101/list_tile_learn.dart';
 import 'package:flutter_learn/101/padding_learn.dart';
+import 'package:flutter_learn/101/stack_learn.dart';
 import 'package:flutter_learn/101/stateless_learn.dart';
 import 'package:flutter_learn/101/text_learn_view.dart';
 import 'package:flutter_learn/demos/note_demos_view.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 0,
           )),
-      home: const ColumnRowLearn(),
+      home: const StackLearn(),
     );
   }
 }
