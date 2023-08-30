@@ -17,6 +17,7 @@ import 'package:flutter_learn/101/statefull_lifecycle_learn.dart';
 import 'package:flutter_learn/101/stateless_learn.dart';
 import 'package:flutter_learn/101/text_field_learn.dart';
 import 'package:flutter_learn/101/text_learn_view.dart';
+import 'package:flutter_learn/demos/color_demos_view.dart';
 import 'package:flutter_learn/demos/note_demos_view.dart';
 import 'package:flutter_learn/demos/stack_demo_view.dart';
 
@@ -48,8 +49,8 @@ class MyApp extends StatelessWidget {
                 iconColor: Colors.red,
                 border: OutlineInputBorder(),
                 floatingLabelStyle: TextStyle(color: Colors.blue, fontSize: 24, fontWeight: FontWeight.w600)),
-                // bu sekilde text color'in rengi degisiyor ama butun title medium olanlarda degsiyor.
-                // text color'i class icinde vermek daa mantıkli temadan vermketen.
+            // bu sekilde text color'in rengi degisiyor ama butun title medium olanlarda degsiyor.
+            // text color'i class icinde vermek daa mantıkli temadan vermketen.
             textTheme: const TextTheme(titleMedium: TextStyle(color: Colors.red)),
             iconTheme: const IconThemeData(),
             appBarTheme: const AppBarTheme(
@@ -58,6 +59,6 @@ class MyApp extends StatelessWidget {
               backgroundColor: Colors.transparent,
               elevation: 0,
             )),
-        home: const TextFieldLearn());
+        home: const ColorDemos());
   }
 }
