@@ -11,12 +11,13 @@ class TabLearn extends StatefulWidget {
 
 class _TabLearnState extends State<TabLearn> with TickerProviderStateMixin {
   late final TabController _tabController;
+  final double _notchedvalue = 10;
 
 // vsync sayfada tabcontroller'i kullnamamı sagliyoor.
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: _MyTabViews.values.length, vsync: this);
   }
 
   @override
@@ -27,57 +28,44 @@ class _TabLearnState extends State<TabLearn> with TickerProviderStateMixin {
           extendBody: true,
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(onPressed: () {
-            _tabController.animateTo(0);
+            _tabController.animateTo(_MyTabViews.home.index);
           }),
-          bottomNavigationBar: BottomAppBar(
-              notchMargin: 10,
-              child: TabBar(
-                  padding: EdgeInsets.zero,
-                  // hangisine tiklandigini buradan gorebiliriz.
-                  onTap: (int index) {
-                    print(index);
-                  },
-                  controller: _tabController,
-                  tabs: const [
-                    Tab(
-                      text: 'Page1',
-                    ),
-                    Tab(
-                      text: 'Page2',
-                    )
-                  ])),
-          appBar: AppBar(
-            bottom: TabBar(controller: _tabController, tabs: const [
-              Tab(
-                text: 'Page1',
-              ),
-              Tab(
-                text: 'Page 2',
-              )
-            ]),
-          ),
-          body: TabBarView(
-              // gecisi engellemis olduk
-              physics: const NeverScrollableScrollPhysics(),
-              controller: _tabController,
-              children: [
-                const ImageLearn(),
-                IconLearnView(),
-              ]),
+          bottomNavigationBar: BottomAppBar(notchMargin: _notchedvalue, child: _myTabView()),
+          appBar: AppBar(),
+          body: _tabbarView(),
         ));
+  }
+
+  TabBar _myTabView() {
+    return TabBar(
+        padding: EdgeInsets.zero,
+        // hangisine tiklandigini buradan gorebiliriz.
+        onTap: (int index) {},
+        controller: _tabController,
+        tabs: _MyTabViews.values
+            .map((e) => Tab(
+                  text: e.name,
+                ))
+            .toList());
+  }
+
+  TabBarView _tabbarView() {
+    return TabBarView(
+        // gecisi engellemis olduk
+        physics: const NeverScrollableScrollPhysics(),
+        controller: _tabController,
+        children: [
+          const ImageLearn(),
+          IconLearnView(),
+          const ImageLearn(),
+          IconLearnView(),
+        ]);
   }
 }
 
 // benim 4 sayfam olabilir..
-enum _MyTabViews {
-  home,
-  setting,
-  favorite,
-  profile,
-}
+enum _MyTabViews { home, setting, favorite, profile }
 // peki text'leri vs bu yukaridaki sayfalara ozel nasil kullanacagim.
 // bu durmda extensions yazarim. extension class'lara ya da bir insatance'a guc kazandirmaktir.
 
-extension _MyTabViewExtension on _MyTabViews {
-  void name(params) {}
-}
+extension _MyTabViewExtension on _MyTabViews {}
