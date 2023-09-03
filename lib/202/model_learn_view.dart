@@ -19,7 +19,7 @@ class _ModelLearnViewState extends State<ModelLearnView> {
 // bu class'ta nullable olabilir dedeiigm icin ve constructor vermedigim icin
 // bizden deger istemedi.
 // bunlari 2 sekilde kullanabilirm:
-    final user1 = PostModel()
+    final user1 = PostModel1()
       ..userId = 1
       ..body = 'hf';
     user1.body = "hello";
