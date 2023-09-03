@@ -17,12 +17,15 @@ class _ServiceLearnState extends State<ServiceLearn> {
 
   // burada oading gostermek istiyorsam:
   bool _isLoading = false;
+  late final Dio _dio;
+  final _baseUrl = 'https://jsonplaceholder.typicode.com/';
 
 // bunu proje basladigi ilk anda cagisaracaksak initstate icine yazariz.
   // initstate icinde await diyemem. cunku bu bir constructordir ve async olmaaz. runtime'da calisir ve biter.
   @override
   void initState() {
     super.initState();
+    _dio = Dio(BaseOptions(baseUrl: _baseUrl));
     name = 'hicran';
     fetchPostItems();
   }
@@ -39,6 +42,27 @@ class _ServiceLearnState extends State<ServiceLearn> {
     // dio get future yani generic tip doner. Bunu kullanmak icin response'a atayip await eklemem gerekir.
     // await eklemek demek , bu kodu bekle bu koddan sonrasina gecme dmeek.
     final response = await Dio().get('https://jsonplaceholder.typicode.com/posts');
+    if (response.statusCode == HttpStatus.ok) {
+      final _datas = response.data;
+      // data'nin generic olarak ne old anlamis oluyorum..
+      if (_datas is List) {
+        // maplemek yeni bir obje uretmek demek.
+        // amac bu listeyi yeni bir liste yapmak..
+        setState(() {
+          _items = _datas.map((e) => PostModel.fromJson(e)).toList();
+        });
+      }
+    }
+    _changeLoading();
+  }
+
+// her request icin dio olusturmak dogru degil.
+  Future<void> fetchPostItemAdvanced() async {
+    _changeLoading();
+// asenkron oldugundan bitmeden bi alta gecmez!
+    // dio get future yani generic tip doner. Bunu kullanmak icin response'a atayip await eklemem gerekir.
+    // await eklemek demek , bu kodu bekle bu koddan sonrasina gecme dmeek.
+    final response = await _dio.get('posts');
     if (response.statusCode == HttpStatus.ok) {
       final _datas = response.data;
       // data'nin generic olarak ne old anlamis oluyorum..
