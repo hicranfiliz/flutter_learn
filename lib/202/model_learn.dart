@@ -4,7 +4,7 @@
 // ve bunlari initialize etmenin 4 yolu var..
 
 // ilki benim variable'larimin hepsi null gelebilir..
-class PostModel {
+class PostModel1 {
   int? userId;
   int? id;
   String? title;
