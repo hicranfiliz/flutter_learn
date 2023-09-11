@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_learn/202/cache/shared_manager.dart';
+import 'package:flutter_learn/202/cache/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedLearn extends StatefulWidget {
@@ -14,17 +15,20 @@ class _SharedLearnState extends LoadingStatefull<SharedLearn> {
   // bu initstate'de esitlenecek ve bri daha deger almayacak o yuzden late final diyorum.
   late final SharedManager _manager;
 
+  late final List<User> userItems;
+
   @override
   void initState() {
     super.initState();
     _manager = SharedManager();
+    userItems = UserItems().users;
     _initialize();
   }
 
   Future<void> _initialize() async {
-    _changeLoading();
+    changeLoading();
     await _manager.init();
-    _changeLoading();
+    changeLoading();
     getDefaultValues();
   }
 
@@ -46,34 +50,41 @@ class _SharedLearnState extends LoadingStatefull<SharedLearn> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_currentValue.toString()),
-        actions: [
-          isLoading
-              ? Center(
-                  child: CircularProgressIndicator(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                  ),
-                )
-              : const SizedBox.shrink()
-        ],
+        actions: [_loading(context)],
       ),
       floatingActionButton: Row(
         mainAxisSize: MainAxisSize.min,
         children: [_saveValueButton(), _removeValueButton()],
       ),
-      body: TextField(
-        onChanged: (value) {
-          _onChangeValue(value);
-        },
+      body: Column(
+        children: [
+          TextField(
+            onChanged: (value) {
+              _onChangeValue(value);
+            },
+          ),
+          Expanded(child: _UserListView())
+        ],
       ),
     );
+  }
+
+  SingleChildRenderObjectWidget _loading(BuildContext context) {
+    return isLoading
+        ? Center(
+            child: CircularProgressIndicator(
+              color: Theme.of(context).scaffoldBackgroundColor,
+            ),
+          )
+        : const SizedBox.shrink();
   }
 
   FloatingActionButton _saveValueButton() {
     return FloatingActionButton(
         onPressed: (() async {
-          _changeLoading();
+          changeLoading();
           await _manager.saveStringValue(SharedKeys.counter, _currentValue.toString());
-          _changeLoading();
+          changeLoading();
         }),
         child: const Icon(Icons.save));
   }
@@ -81,11 +92,48 @@ class _SharedLearnState extends LoadingStatefull<SharedLearn> {
   FloatingActionButton _removeValueButton() {
     return FloatingActionButton(
         onPressed: (() async {
-          _changeLoading();
+          changeLoading();
           await _manager.removeItem(SharedKeys.counter);
-          _changeLoading();
+          changeLoading();
         }),
         child: const Icon(Icons.remove));
+  }
+}
+
+class _UserListView extends StatelessWidget {
+  _UserListView({
+    super.key,
+  });
+
+  final List<User> users = UserItems().users;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: users.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Card(
+            child: ListTile(
+                title: Text(users[index].name),
+                subtitle: Text(users[index].description),
+                trailing: Text(
+                  users[index].url,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(decoration: TextDecoration.underline),
+                )),
+          );
+        });
+  }
+}
+
+// dummy yapmak istiyorsak yukarda kullanmiyoruz..
+class UserItems {
+  late final List<User> users;
+  UserItems() {
+    users = [
+      User('hf', '10', 'hf10.dev'),
+      User('gd', '35', 'gf10.dev'),
+      User('rd', '10', 'rd10.dev'),
+    ];
   }
 }
 
@@ -93,7 +141,7 @@ class _SharedLearnState extends LoadingStatefull<SharedLearn> {
 abstract class LoadingStatefull<T extends StatefulWidget> extends State<T> {
   bool isLoading = false;
 
-  void _changeLoading() {
+  void changeLoading() {
     setState(() {
       isLoading = !isLoading;
     });
