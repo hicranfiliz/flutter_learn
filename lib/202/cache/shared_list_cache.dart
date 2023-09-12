@@ -13,12 +13,27 @@ class SharedListCache extends StatefulWidget {
 
 class _SharedListCacheState extends LoadingStatefull<SharedListCache> {
   late final UserCacheManager userCacheManager;
-  final List<User> _users = UserItems().users;
+  List<User> _users = [];
 
   @override
   void initState() {
     super.initState();
-    userCacheManager = UserCacheManager(SharedManager());
+    initalizeAndSave();
+    // shared manager initialize etme..
+    // Bu kodu daha iyi yazmanin yolu.. fun cikarmak
+    // final SharedManager manager = SharedManager();
+    // manager.init().whenComplete(() {
+    //   userCacheManager = UserCacheManager(SharedManager());
+    // });
+  }
+
+  Future<void> initalizeAndSave() async {
+    changeLoading();
+    final SharedManager manager = SharedManager();
+    await manager.init();
+    userCacheManager = UserCacheManager(manager);
+    _users = userCacheManager.getItems() ?? [];
+    changeLoading();
   }
 
   @override
@@ -27,16 +42,18 @@ class _SharedListCacheState extends LoadingStatefull<SharedListCache> {
       appBar: AppBar(
         centerTitle: true,
         title: isLoading ? CircularProgressIndicator(color: Theme.of(context).scaffoldBackgroundColor) : null,
-        actions: [
-          IconButton(
-              onPressed: () async {
-                changeLoading();
-                await userCacheManager.saveItems(_users);
-                changeLoading();
-              },
-              icon: const Icon(Icons.download_for_offline_outlined)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.remove_circle_outline)),
-        ],
+        actions: isLoading
+            ? null
+            : [
+                IconButton(
+                    onPressed: () async {
+                      changeLoading();
+                      await userCacheManager.saveItems(_users);
+                      changeLoading();
+                    },
+                    icon: const Icon(Icons.download_for_offline_outlined)),
+                IconButton(onPressed: () {}, icon: const Icon(Icons.remove_circle_outline)),
+              ],
       ),
       body: _UserListView(users: _users),
     );
@@ -58,10 +75,10 @@ class _UserListView extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return Card(
             child: ListTile(
-                title: Text(users[index].name),
-                subtitle: Text(users[index].description),
+                title: Text(users[index].name ?? ''),
+                subtitle: Text(users[index].description ?? ''),
                 trailing: Text(
-                  users[index].url,
+                  users[index].url ?? '',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(decoration: TextDecoration.underline),
                 )),
           );

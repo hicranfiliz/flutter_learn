@@ -114,10 +114,10 @@ class _UserListView extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return Card(
             child: ListTile(
-                title: Text(users[index].name),
-                subtitle: Text(users[index].description),
+                title: Text(users[index].name ?? ''),
+                subtitle: Text(users[index].description ?? ''),
                 trailing: Text(
-                  users[index].url,
+                  users[index].url ?? '',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(decoration: TextDecoration.underline),
                 )),
           );
