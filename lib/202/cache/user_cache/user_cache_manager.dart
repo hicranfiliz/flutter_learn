@@ -18,7 +18,7 @@ class UserCacheManager {
 
     // element ile listenin butun elemanlarini donuyor.
     // COMPUTE..
-    final _items = items.map((element) => jsonEncode(element)).toList();
+    final _items = items.map((element) => jsonEncode(element.toJson())).toList();
     await sharedManager.saveStringItems(SharedKeys.users, _items);
   }
 
@@ -27,9 +27,12 @@ class UserCacheManager {
     // eger bossa if blogu icine gir degilse false don!
     if (itemString?.isNotEmpty ?? false) {
       return itemString!.map((element) {
-        final jsonObject = jsonDecode(element);
+        final json = jsonDecode(element);
+        if (json is Map<String, dynamic>) {
+          return User.fromJson(json);
+        }
 
-        return User('name', 'description', 'url');
+        return User('', '', '');
       }).toList();
     }
     return null;
