@@ -20,11 +20,21 @@ import 'package:flutter_learn/101/statefull_lifecycle_learn.dart';
 import 'package:flutter_learn/101/stateless_learn.dart';
 import 'package:flutter_learn/101/text_field_learn.dart';
 import 'package:flutter_learn/101/text_learn_view.dart';
+import 'package:flutter_learn/202/animated_learn_view.dart';
+import 'package:flutter_learn/202/cache/secure_context/secure_context_learn.dart';
+import 'package:flutter_learn/202/cache/shared_learn_cache.dart';
+import 'package:flutter_learn/202/cache/shared_list_cache.dart';
+import 'package:flutter_learn/202/form_learn_view.dart';
 import 'package:flutter_learn/202/model_learn_view.dart';
+import 'package:flutter_learn/202/oop-learn_view.dart';
 import 'package:flutter_learn/202/package_learn_view.dart';
 import 'package:flutter_learn/202/service/service_get_learn_view.dart';
 import 'package:flutter_learn/202/service/service_post_learn_view.dart';
+import 'package:flutter_learn/202/sheet_learn.dart';
+import 'package:flutter_learn/202/state_manage/state_manage_learn_view.dart';
 import 'package:flutter_learn/202/tab_learn.dart';
+import 'package:flutter_learn/202/image_learn202.dart';
+import 'package:flutter_learn/202/theme/light_theme.dart';
 import 'package:flutter_learn/demos/color_demos_view.dart';
 import 'package:flutter_learn/demos/color_lifecycle_view.dart';
 import 'package:flutter_learn/demos/my_colections_demos.dart';
@@ -46,35 +56,37 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         // ap'teki butun appbarlarda bulunan ortak ozellikleri belirt:
         // appbar'i her zaman burada belirt.
-        theme: ThemeData.dark().copyWith(
-            tabBarTheme: const TabBarTheme(
-              labelColor: Colors.white,
-              unselectedLabelColor: Colors.red,
-              indicatorSize: TabBarIndicatorSize.label,
-            ),
-            bottomAppBarTheme: const BottomAppBarTheme(shape: CircularNotchedRectangle()),
-            progressIndicatorTheme: const ProgressIndicatorThemeData(color: Colors.red),
-            // butun card'lari ayni yapar.
-            listTileTheme: const ListTileThemeData(contentPadding: EdgeInsets.zero),
-            cardTheme: CardTheme(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
-            // color error duplaceted and i solve that:
-            colorScheme: Theme.of(context).colorScheme.copyWith(error: ColorsItems.turquaz_blue),
-            inputDecorationTheme: const InputDecorationTheme(
-                filled: true,
-                fillColor: Colors.white,
-                iconColor: Colors.red,
-                border: OutlineInputBorder(),
-                floatingLabelStyle: TextStyle(color: Colors.blue, fontSize: 24, fontWeight: FontWeight.w600)),
-            // bu sekilde text color'in rengi degisiyor ama butun title medium olanlarda degsiyor.
-            // text color'i class icinde vermek daa mantıkli temadan vermketen.
-            textTheme: const TextTheme(titleMedium: TextStyle(color: Colors.red)),
-            iconTheme: const IconThemeData(),
-            appBarTheme: const AppBarTheme(
-              centerTitle: true,
-              systemOverlayStyle: SystemUiOverlayStyle.light,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-            )),
-        home: const PackageLearnView());
+        theme:
+            //LightTheme().theme,
+            ThemeData.dark().copyWith(
+                tabBarTheme: const TabBarTheme(
+                  labelColor: Colors.white,
+                  unselectedLabelColor: Colors.red,
+                  indicatorSize: TabBarIndicatorSize.label,
+                ),
+                bottomAppBarTheme: const BottomAppBarTheme(shape: CircularNotchedRectangle()),
+                progressIndicatorTheme: const ProgressIndicatorThemeData(color: Colors.red),
+                // butun card'lari ayni yapar.
+                listTileTheme: const ListTileThemeData(contentPadding: EdgeInsets.zero),
+                cardTheme: CardTheme(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+                // color error duplaceted and i solve that:
+                colorScheme: Theme.of(context).colorScheme.copyWith(error: ColorsItems.turquaz_blue),
+                inputDecorationTheme: const InputDecorationTheme(
+                    filled: true,
+                    fillColor: Colors.white,
+                    iconColor: Colors.red,
+                    border: OutlineInputBorder(),
+                    floatingLabelStyle: TextStyle(color: Colors.blue, fontSize: 24, fontWeight: FontWeight.w600)),
+                // bu sekilde text color'in rengi degisiyor ama butun title medium olanlarda degsiyor.
+                // text color'i class icinde vermek daa mantıkli temadan vermketen.
+                textTheme: const TextTheme(titleMedium: TextStyle(color: Colors.red)),
+                iconTheme: const IconThemeData(),
+                appBarTheme: const AppBarTheme(
+                  centerTitle: true,
+                  systemOverlayStyle: SystemUiOverlayStyle.light,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                )),
+        home: const SheetLearn());
   }
 }
