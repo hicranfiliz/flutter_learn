@@ -24,9 +24,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_learn/303/reqres_resource/model/resource_model.dart';
 
 abstract class IReqreService {
-  final Dio dio;
-
   IReqreService(this.dio);
+  final Dio dio;
 
 //
   Future<ResourceModel?> fetchResourceItem();
@@ -40,6 +39,7 @@ class ReqresService extends IReqreService {
   @override
   Future<ResourceModel?> fetchResourceItem() async {
     final response = await dio.get('/${_ReqResPath.resource.name}');
+    //final response = await dio.get('/${_ReqResPath.resource.toString().split('.').last}');
 
     if (response.statusCode == HttpStatus.ok) {
       final jsonBody = response.data;
