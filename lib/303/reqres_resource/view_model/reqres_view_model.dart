@@ -35,4 +35,7 @@ abstract class ReqResViewModel extends LoadingStatefull<ReqResView> implements P
     resources = (await reqreService.fetchResourceItem())?.data ?? [];
     changeLoading();
   }
+
+  // reqresViewModel'da datalar yuklendikten sonra locale save edilsin..
+  // Burada context'e ihtiyacim var.
 }

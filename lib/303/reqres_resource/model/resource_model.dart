@@ -30,6 +30,12 @@ class Data {
 
   Data({this.id, this.name, this.year, this.color, this.pantoneValue});
 
+  // 5. Buraya color'in bir metodu olmali.
+  // benim color tipime veya integer'a cevirecek bir sey olmali.
+// ve bu metod computed calisacak. Yani cagrildiginda bub deger calisacak om-nun icin getter yaziyorum.
+// Oncelikle renk kodunda #'ten kurtulmam lazim..
+// Ama eger bu colorValue metodu global oldduysa product altinda extensions klasoru altina tasi.
+
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
