@@ -18,7 +18,7 @@ class _MyCollectionsDemosState extends State<MyCollectionsDemos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Color.fromARGB(255, 214, 150, 242),
       appBar: AppBar(
         title: const Text('hg'),
       ),

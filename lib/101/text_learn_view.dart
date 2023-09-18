@@ -44,7 +44,7 @@ class TextLearnView extends StatelessWidget {
 }
 
 class ProjectStyles {
-  static TextStyle welcomeStyle = TextStyle(
+  static TextStyle welcomeStyle = const TextStyle(
       wordSpacing: 2,
       decoration: TextDecoration.underline,
       fontStyle: FontStyle.italic,

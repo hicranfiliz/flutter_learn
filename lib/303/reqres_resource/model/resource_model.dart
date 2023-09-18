@@ -1,3 +1,4 @@
+@JsonSerializable()
 class ResourceModel {
   List<Data>? data;
 
@@ -21,6 +22,7 @@ class ResourceModel {
   }
 }
 
+@JsonSerializable()
 class Data {
   int? id;
   String? name;
