@@ -39,6 +39,7 @@ import 'package:flutter_learn/202/tab_learn.dart';
 import 'package:flutter_learn/202/image_learn202.dart';
 import 'package:flutter_learn/202/theme/light_theme.dart';
 import 'package:flutter_learn/303/call_back_learn.dart';
+import 'package:flutter_learn/303/lottie_learn.dart';
 import 'package:flutter_learn/303/reqres_resource/view/reqres_view.dart';
 import 'package:flutter_learn/303/tabbar_advanced.dart';
 import 'package:flutter_learn/demos/color_demos_view.dart';
@@ -46,6 +47,7 @@ import 'package:flutter_learn/demos/color_lifecycle_view.dart';
 import 'package:flutter_learn/demos/my_colections_demos.dart';
 import 'package:flutter_learn/demos/note_demos_view.dart';
 import 'package:flutter_learn/demos/stack_demo_view.dart';
+import 'package:flutter_learn/product/constant/project_items.dart';
 import 'package:flutter_learn/product/global/resource_context.dart';
 import 'package:flutter_learn/product/global/theme_notifier.dart';
 import 'package:provider/provider.dart';
@@ -72,7 +74,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: ProjectItems.projectName,
         debugShowCheckedModeBanner: false,
         // ap'teki butun appbarlarda bulunan ortak ozellikleri belirt:
         // appbar'i her zaman burada belirt.
@@ -108,6 +110,6 @@ class MyApp extends StatelessWidget {
         //       elevation: 0,
         //
 
-        home: const ReqResView());
+        home: const LottieLearn());
   }
 }
