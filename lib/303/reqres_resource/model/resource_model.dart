@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 // uretilmesi icin sunu yapmaliyiz:
 // BUild runner benim icin butun projeyi gezip, gelistiri. 
@@ -28,7 +29,9 @@ class ResourceModel {
 
 @JsonSerializable(
 )
-class Data {
+// equateble esit saymak
+// burada datayi equateble'dan extend edersem bir override alir yani hangilerine gore esit sayacagim..
+class Data extends Equatable{
   final int? id;
   final String? name;
   final int? year;
@@ -42,7 +45,7 @@ class Data {
   final String? price;
   final StatusCode? status;
 
-  Data(this.status, {this.id, this.name, this.year, this.color, this.pantoneValue,this.price});
+  const Data(this.status, {this.id, this.name, this.year, this.color, this.pantoneValue,this.price});
 
   // 5. Buraya color'in bir metodu olmali.
   // benim color tipime veya integer'a cevirecek bir sey olmali.
@@ -53,6 +56,10 @@ class Data {
   factory Data.fromJson(Map<String, dynamic> json) {
     return _$DataFromJson(json);
   }
+  
+  // buarada diyorum ki iki objenin id'si name ve price'i ayniysa ayni objedir.
+  @override
+  List<Object?> get props =>[id,name,price] ;
 
   // Map<String, dynamic> toJson() {
   //   return _$DataToJson(this);
