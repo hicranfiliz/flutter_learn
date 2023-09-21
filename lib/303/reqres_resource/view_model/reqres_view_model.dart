@@ -4,7 +4,9 @@ import 'package:flutter_learn/202/cache/shared_learn_cache.dart';
 import 'package:flutter_learn/303/reqres_resource/model/resource_model.dart';
 import 'package:flutter_learn/303/reqres_resource/service/reqres_service.dart';
 import 'package:flutter_learn/303/reqres_resource/view/reqres_view.dart';
+import 'package:flutter_learn/product/constant/project_items.dart';
 import 'package:flutter_learn/product/service/project_dio.dart';
+import 'package:flutter_learn/product/service/project_network_manager.dart';
 
 // 2...
 // view 'deki State<ReqResView> extend ediyor. View file'indaki de ReqResViewModel  extend edecek.
@@ -23,7 +25,8 @@ abstract class ReqResViewModel extends LoadingStatefull<ReqResView> implements P
   @override
   void initState() {
     super.initState();
-    reqreService = ReqresService(service);
+    reqreService = ReqresService(ProjectNetworkManager.instance.service);
+    ProjectNetworkManager.instance.addBaseHeaderToToken('hicran');
     //changeLoading();
     _fetch();
   }
