@@ -32,8 +32,8 @@ dependencies:
     sdk: flutter
 
   dio: ^5.3.2
-
-  json_annotation: ^4.8.1
+ 
+  
 
   #Cache
   shared_preferences: ^2.2.1
@@ -49,6 +49,7 @@ dependencies:
   #Google
   url_launcher: ^6.1.14
   json_serializable: ^6.7.1
+  json_annotation: ^4.8.1
   
 
   # The following adds the Cupertino Icons font to your application.
