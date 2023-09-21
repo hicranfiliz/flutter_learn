@@ -1,5 +1,6 @@
 //
 import 'package:flutter/material.dart';
+import 'package:flutter_learn/202/theme/light_theme.dart';
 
 // Eger bundan diger sayfalar etkilenecekse bu class'i ChangeNotifier'dan turetmemiz gerekiyor.
 class ThemeNotifier extends ChangeNotifier {
@@ -10,5 +11,5 @@ class ThemeNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  ThemeData get currentTheme => isLightTheme ? ThemeData.light() : ThemeData.dark();
+  ThemeData get currentTheme => !isLightTheme ? ThemeData.light() : ThemeData.dark();
 }
