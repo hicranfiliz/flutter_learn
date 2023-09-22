@@ -3,6 +3,7 @@ import 'package:flutter_learn/101/page_view_learn.dart';
 import 'package:flutter_learn/product/constant/duration_items.dart';
 import 'package:flutter_learn/product/constant/lottie_items.dart';
 import 'package:flutter_learn/product/global/theme_notifier.dart';
+import 'package:flutter_learn/product/navigator/navigater_routes.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,14 @@ bool isLight = false;
   void initState() {
     super.initState();
     controller = AnimationController(vsync: this,duration: DurationItems.durationNormal());
+    navigateToHome();
+  }
+
+  Future<void> navigateToHome() async {
+    await Future.delayed(const Duration(seconds: 1));
+    // onceden push yapiyorduk.
+    // pushNamed dedigimde geri gelebiliyor. Bnu engellemek icin pushreplacement kullan!:
+    Navigator.of(context).pushReplacementNamed(NavigateRoutes.home.withParaf);
   }
  
   @override

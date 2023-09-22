@@ -39,7 +39,10 @@ import 'package:flutter_learn/202/tab_learn.dart';
 import 'package:flutter_learn/202/image_learn202.dart';
 import 'package:flutter_learn/202/theme/light_theme.dart';
 import 'package:flutter_learn/303/call_back_learn.dart';
+import 'package:flutter_learn/303/feed_view.dart';
 import 'package:flutter_learn/303/lottie_learn.dart';
+import 'package:flutter_learn/303/navigator/navigate_home_detail_view.dart';
+import 'package:flutter_learn/303/navigator/navigate_home_view.dart';
 import 'package:flutter_learn/303/reqres_resource/view/reqres_view.dart';
 import 'package:flutter_learn/303/tabbar_advanced.dart';
 import 'package:flutter_learn/demos/color_demos_view.dart';
@@ -50,6 +53,8 @@ import 'package:flutter_learn/demos/stack_demo_view.dart';
 import 'package:flutter_learn/product/constant/project_items.dart';
 import 'package:flutter_learn/product/global/resource_context.dart';
 import 'package:flutter_learn/product/global/theme_notifier.dart';
+import 'package:flutter_learn/product/navigator/navigater_routes.dart';
+import 'package:flutter_learn/product/navigator/navigator_custom.dart';
 import 'package:provider/provider.dart';
 
 // 11. Provider'in buaradki kullanimi:
@@ -67,7 +72,7 @@ void main() {
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget with NavigatorCustom{
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -110,6 +115,32 @@ class MyApp extends StatelessWidget {
         //       elevation: 0,
         //
 
-        home: const LottieLearn());
+// eger routuing veriyorsam home'u vermemem gerekiyor.
+       // initialRoute: '/',
+       // splash atma, yetkisiz giris icin bunu kullanabilirz.
+       onUnknownRoute: (settings) {
+        return MaterialPageRoute(builder: (context){
+          return const LottieLearn();
+        });
+       },
+       // burada ya ongenereateRoute ya da Route ; ikisknden birini kullanmamiz gerekiyor.
+       // routes: NavigatorRoutes().items,
+        // Burada property'ler yollayip bunlari kontrol edebiliyorum..
+        // mesela setting icindeki argumentlerde admin geldi. butuns sayfayi kapatabiliyorum
+        //// ama bunu buradan cikartmak lazim.. 
+        onGenerateRoute: onGenerateRoute,
+        
+        // !! BUnlari da global bir class'a cikarttik.
+
+        // {
+        //   // hicbir root girmedim, bu projenin default acilacagi yer bu olsun demek.
+        //   //1. lottielearn benim splash'im.
+        //   "/": (context) => const LottieLearn(),
+        // // 2. Bundan sonra gidecegim sayfayı veriyorum..
+        //   "/home":(context) => const NavigateHomeView(),
+        //   "/homeDetail": (context) => const NavigateHomeDetailView()
+        // },
+        //home: const LottieLearn()
+        );
   }
 }
