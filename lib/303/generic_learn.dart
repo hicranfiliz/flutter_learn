@@ -7,6 +7,8 @@
 // - bana su sekiilde donsun gibi islemler yapabilirlim..
 
 // UserManagement'i kullanacak kisinin admin olmasini istiyorum..
+import 'package:equatable/equatable.dart';
+
 class UserManagement<T extends AdminUser> {
   // sadece bunu yazarak : final AdminUser admin;
   // bu metodu kullanacak kisinin admin olmasini digerlerinini kullnanmamasini engellleyemiyprum
@@ -54,13 +56,25 @@ class HFModels<T> {
   HFModels(this.items);
 }
 
-class GenericUser {
+class GenericUser extends Equatable{
   final String name;
   final String id;
   final int money;
 
   GenericUser(this.name, this.id, this.money);
-}
+
+  bool findUserName(String name) {
+    return this.name == name;
+  }
+
+ @override
+  String toString() => 'GenericUser(name: $name, id: $id, money: $money)';
+  
+  @override
+  // TODO: implement props
+  List<Object?> get props => [id];
+  }
+
 
 class AdminUser extends GenericUser {
   final int role;
