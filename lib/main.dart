@@ -55,6 +55,7 @@ import 'package:flutter_learn/product/global/resource_context.dart';
 import 'package:flutter_learn/product/global/theme_notifier.dart';
 import 'package:flutter_learn/product/navigator/navigater_routes.dart';
 import 'package:flutter_learn/product/navigator/navigator_custom.dart';
+import 'package:flutter_learn/product/navigator/navigator_manager.dart';
 import 'package:provider/provider.dart';
 
 // 11. Provider'in buaradki kullanimi:
@@ -129,6 +130,7 @@ class MyApp extends StatelessWidget with NavigatorCustom{
         // mesela setting icindeki argumentlerde admin geldi. butuns sayfayi kapatabiliyorum
         //// ama bunu buradan cikartmak lazim.. 
         onGenerateRoute: onGenerateRoute,
+        navigatorKey: NavigatorManager2.instance.navigatorGlobalKey,
         
         // !! BUnlari da global bir class'a cikarttik.
 
